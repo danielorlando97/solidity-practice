@@ -4,6 +4,7 @@
 
 A collection of contracts written by [Solidity](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjlhN-foLj7AhWmKlkFHRdrCLUQFnoECA4QAQ&url=https%3A%2F%2Fdocs.soliditylang.org%2F&usg=AOvVaw2X1i5UVXvW48liVwACmH5g), where each of them has 
 its own proof using [Hardhat](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiJxt6ioLj7AhUJEVkFHRHrDL4QFnoECAkQAQ&url=https%3A%2F%2Fhardhat.org%2F&usg=AOvVaw0elAXCQakBN-UP6iVxaLI_). 
+
 **Principal Skills**: `Solidity` `JavaScript` `Hardhat` `Ethereum` 
 
 ## 🤓 Motivation 
