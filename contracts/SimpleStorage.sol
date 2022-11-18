@@ -18,7 +18,7 @@ contract SimpleStorage {
         console.log("%s create a new store", msg.sender);
     }
 
-    function store(uint256 x) public {
+    function store(uint256 x) public virtual {
         console.log("new age %s", x);
         age = x;
     }
