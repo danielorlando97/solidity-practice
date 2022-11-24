@@ -34,8 +34,8 @@ abi = compiled_sol["contracts"]['SimpleStorage.sol']['SimpleStorage']["abi"]
 
 w3 = web3.Web3(web3.Web3.HTTPProvider('HTTP://127.0.0.1:7545'))
 chain_id = 5777
-my_address = "0xAf79971d2BAf2a4DEdff14F7ae70e806Efa9077e"
-private_key = "50e65e2173039e944c9b4fc97171cc50bf79711160445d12cbe2a06f12d9cf9f"
+my_address = "0xf15558f7aC06477954133f297AE598A13ad8Ad37"
+private_key = "e6635ccc79937ff89d811362e88de7325bfc08a65e706482a709beb4fdeff0cb"
 
 SimpleStorage = w3.eth.contract(abi = abi, bytecode = tecode)
 nonce = w3.eth.getTransactionCount(my_address)
@@ -52,7 +52,7 @@ tx = SimpleStorage.constructor().buildTransaction({
     # "chainId" : chain_id, 
     'from': my_address, 'nonce': nonce,"gasPrice": w3.eth.gas_price
 })
-print(tx)
+# print(tx)
 print('It born')
 
 # If you encounter the following error:
@@ -69,3 +69,26 @@ print('Transaction signed')
 tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
 # print(tx_hash)
 print('Transaction deployed')
+
+block = w3.eth.get_transaction_receipt(tx_hash)
+print(block)
+print('Transaction mined')
+
+
+ss_contract = w3.eth.contract(block.contractAddress, abi = abi)
+print(ss_contract.functions.retrieve())
+print(ss_contract.functions.retrieve().call())
+print(ss_contract.functions.store(25).call())
+print(ss_contract.functions.retrieve().call())
+
+store_tx = ss_contract.functions.store(30).buildTransaction({
+    'from': my_address, 'nonce': nonce + 1, "gasPrice": w3.eth.gas_price
+})
+
+signed_store_tx = w3.eth.account.sign_transaction(store_tx, private_key = private_key)
+store_tx_hash = w3.eth.send_raw_transaction(signed_store_tx.rawTransaction)
+block = w3.eth.get_transaction_receipt(store_tx_hash)
+
+print(ss_contract.functions.retrieve().call())
+
+
