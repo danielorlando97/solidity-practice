@@ -21,5 +21,21 @@ networks:
   rinkeby:
     eth_usd_price_feed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e"
 
-  mainnet-fork:
+
+  # For use this network we have to create an account in (alchemy)[]
+  # There, we have to create a new app and take its http url
+  # After that, we can run the next command to create our new network 
+  #     
+  # Be careful, we shouldn't have a network with the same name
+  # 
+  # ```bash
+  # brownie networks add development mainnet-fork-dev cmd=ganache-cli \ 
+  #   host=http://127.0.0.1 fork= {{http/alchemy/app}} \ 
+  #   accounts=10 mnemonic=brownie port=8545
+  # ```
+
+  mainnet-fork-dev:
     eth_usd_price_feed: "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419"
+
+app_config:
+  minimal_usd_fee: 50
