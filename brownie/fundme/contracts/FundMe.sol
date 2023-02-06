@@ -11,7 +11,7 @@ contract FundMe {
     mapping(address => uint256) public addressFundGas;
     address[] public senders;
     address public immutable owner;
-    uint256 public constant MIN_USD = 50 * 10**18;
+    uint256 public constant MIN_USD = 2 * 10**18;
 
     PriceConsumerV3 internal priceConsumer;
 
@@ -28,12 +28,12 @@ contract FundMe {
             // Check the minimun amount to fund me
 
             require(
-                priceConsumer.convert(msg.value) >= MIN_USD,
+                priceConsumer.convertWeiToUsd(msg.value) >= MIN_USD,
                 "You need to spend more ETH!"
             );
             // Save people fund me
             addressFundAmount[msg.sender] = msg.value;
-            addressFundAmount[msg.sender] = gasleft();
+            addressFundGas[msg.sender] = gasleft();
             senders.push(msg.sender);
         }
     }
@@ -43,12 +43,12 @@ contract FundMe {
     }
 
     function getCurrentPrice() public view returns (uint256) {
-        uint256 result = priceConsumer.getLatestPrice();
+        uint256 result = uint256(priceConsumer.getLatestPrice());
         return result;
     }
 
     function getEntranceFee() public view returns (uint256) {
-        uint256 minimumUSD = 50 * 10**18;
+        uint256 minimumUSD = 2 * 10**18;
         uint256 price = getCurrentPrice();
         uint256 precision = 1 * 10**18;
         return (minimumUSD * precision) / price;
