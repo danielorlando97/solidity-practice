@@ -20,23 +20,41 @@ contract PriceConsumerV3 {
 
     /**
      * Returns the latest price
+     *  price is (how much USD is igual than a ETH) * 10 ^ 8
+     *  So, x Eth * price = y USD * 10 ^ 8
      */
     function getLatestPrice() public view returns (uint256) {
-        (
-            ,
-            /*uint80 roundID*/
-            int256 price, /*uint startedAt*/ /*uint timeStamp*/ /*uint80 answeredInRound*/
-            ,
-            ,
-
-        ) = priceFeed.latestRoundData();
-
+        (, int256 price, , , ) = priceFeed.latestRoundData();
         return uint256(price);
     }
 
-    function convert(uint256 fundedAmount) public view returns (uint256) {
+    /**
+     * Exprect y ETH * 10 ** 18 => z WEI
+     * Returns x USD * 10 ** 8
+     */
+    function convertWeiToUsd(uint256 weiFundedAmount)
+        public
+        view
+        returns (uint256)
+    {
         uint256 ethPrice = getLatestPrice();
-        uint256 inUSD = (ethPrice * fundedAmount) / 1000000000000000000;
+
+        // Here, there's a big unit change, from 10^18 to 10^8
+        // So this operation can be unstable
+        uint256 inUSD = (ethPrice * weiFundedAmount) / (10**18);
         return inUSD;
+    }
+
+    /**
+     * Exprect x USD * 10 ** 8
+     * Returns x ETH * 10 ** 18 => z WEI
+     */
+    function convertUsdToWei(uint256 usdValue) public view returns (uint256) {
+        uint256 ethPrice = getLatestPrice();
+
+        // Here, the change is upward
+        // And in the divition the dimentions keep stable
+        // So this operation is more stable and sure
+        return (usdValue * 10**18) / ethPrice;
     }
 }
