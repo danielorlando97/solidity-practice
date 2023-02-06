@@ -11,7 +11,8 @@ def deploy_fund_me():
         get_price_feed_address(),
         {'from': account}
     ) 
-    print(f"Contract deploy to {fund_me.address}")
+    print(f"Contract deploy to {fund_me.address}")  
+    return fund_me
 
 def main():
     deploy_fund_me()

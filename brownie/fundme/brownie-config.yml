@@ -17,5 +17,5 @@ networks:
   rinkeby:
     eth_usd_price_feed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e"
 
-  mainnet-fork:
+  mainnet-fork-dev: # test network from  alchemy.com
     eth_usd_price_feed: "0x5f4ec3df9cbd43714fe2740f5e3616155c5b8419"

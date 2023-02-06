@@ -4,7 +4,10 @@ from web3 import Web3
 DECIMALS = 18
 STARING_PRICE = 2000
 
-LOCAL_BLOCKCHAINS = ['development', 'ganache-local']
+# network when I dont have a wallet
+LOCAL_BLOCKCHAINS = ['development', 'ganache-local', 'mainnet-fork-dev']
+# network when I need to mock external services
+TEST_BLOCKCHAINS = ['development', 'ganache-local']
 
 def get_account():
     if network.show_active() in LOCAL_BLOCKCHAINS:
@@ -13,7 +16,7 @@ def get_account():
         return accounts.add(config["wallets"]['from_key'])
 
 def get_price_feed_address():
-    if network.show_active() in LOCAL_BLOCKCHAINS:
+    if network.show_active() in TEST_BLOCKCHAINS:
         return deploy_price_feed_mock()
 
     return config['networks'][network.show_active()][
