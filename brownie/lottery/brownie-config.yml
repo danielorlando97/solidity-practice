@@ -2,11 +2,13 @@ dependencies:
   # to download dependencies from github
   # - <organization/repo>@<version>
   - smartcontractkit/chainlink-brownie-contracts@1.1.1
+  - OpenZeppelin/openzeppelin-contracts@3.4.0
 
 compiler:
   solc:
     remappings:
       - "@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1"
+      - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.4.0"
 # Uncomment to deploy in a real network (test or not)
 # dotenv: .env
 
@@ -21,16 +23,15 @@ networks:
   rinkeby:
     eth_usd_price_feed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e"
 
-
   # For use this network we have to create an account in (alchemy)[]
   # There, we have to create a new app and take its http url
-  # After that, we can run the next command to create our new network 
-  #     
+  # After that, we can run the next command to create our new network
+  #
   # Be careful, we shouldn't have a network with the same name
-  # 
+  #
   # ```bash
-  # brownie networks add development mainnet-fork-dev cmd=ganache-cli \ 
-  #   host=http://127.0.0.1 fork= {{http/alchemy/app}} \ 
+  # brownie networks add development mainnet-fork-dev cmd=ganache-cli \
+  #   host=http://127.0.0.1 fork= {{http/alchemy/app}} \
   #   accounts=10 mnemonic=brownie port=8545
   # ```
 
