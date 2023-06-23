@@ -1,13 +1,13 @@
 dependencies:
   # to download dependencies from github
   # - <organization/repo>@<version>
-  - smartcontractkit/chainlink-brownie-contracts@1.1.1
+  - smartcontractkit/chainlink-brownie-contracts@0.6.1
   - OpenZeppelin/openzeppelin-contracts@3.4.0
 
 compiler:
   solc:
     remappings:
-      - "@chainlink=smartcontractkit/chainlink-brownie-contracts@1.1.1"
+      - "@chainlink=smartcontractkit/chainlink-brownie-contracts@0.6.1"
       - "@openzeppelin=OpenZeppelin/openzeppelin-contracts@3.4.0"
 # Uncomment to deploy in a real network (test or not)
 # dotenv: .env
